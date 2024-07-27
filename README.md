@@ -41,7 +41,7 @@ Incuhive is a hiring platform that helps you simplify the hiring process.
 
 ### ⚙️ Requirements
 
-- Ruby version: 3.2.4
+- Ruby version: 3.2.0
 
 ### 🛠️ Development
 
