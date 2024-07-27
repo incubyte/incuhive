@@ -20,4 +20,5 @@
 <div>
   <strong>Invite Code:</strong>
   <%= @organization.invite_code %>
+  <%= button_to "Regenerate Invite Code", regenerate_invite_code_organization_path(@organization), method: :patch %>
 </div>
