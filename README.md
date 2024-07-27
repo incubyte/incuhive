@@ -53,9 +53,9 @@ cd incuhive
 ```
 
 - Install dependencies: `bundle install`
-- Database setup: `rails db:setup`
-- Run tests: `rspec`
-- Run server: `rails server`
+- Database setup: `bundle exec rails db:setup`
+- Run tests: `bundle exec rspec`
+- Run server: `bundle exec rails server`
 
 ## 🏗️ What's Next
 
