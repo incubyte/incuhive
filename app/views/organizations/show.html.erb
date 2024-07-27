@@ -8,48 +8,69 @@
   <%= javascript_include_tag 'application' %>
 </head>
 <body class="bg-gray-100">
-  <div class="container">
-    <section class="w-full bg-gray-100">
-      <div class="bg-gray-800 text-white text-center py-6">
-        <h1 class="text-3xl font-semibold">Organization</h1>
-        <p class="text-lg">Organization Details</p>
+<div class="container">
+  <section class="w-full bg-gray-100">
+    <div class="bg-gray-800 text-white text-center py-6">
+      <h1 class="text-3xl font-semibold">Organization</h1>
+      <p class="text-lg">Organization Details</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-4 py-4 text-lg">
+      <div class="bg-transparent py-1 px-8 text-cyan-500 text-sm rounded-md w-fit">
+        <p>* Click on the name to edit.</p>
       </div>
 
-      <div class="flex flex-col items-center gap-4 py-4 text-lg">
-        <div class="bg-transparent py-1 px-8 text-cyan-500 text-sm rounded-md w-fit">
-          <p>* Click on the name to edit.</p>
-        </div>
-
-        <div data-controller="inline-edit">
-          <div class="flex flex-row gap-2 items-center">
-            <span class="font-bold">Name:</span>
-            <span data-inline-edit-target="name" class="editable"><%= @organization.name %></span>
-            <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
-            <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
-            <%= 
-              form.submit "Save", 
-              data: { action: "inline-edit#save" },
-              class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-            %>
-            <% end %>
-          </div>
-        </div>
-
+      <div data-controller="inline-edit">
         <div class="flex flex-row gap-2 items-center">
-          <span class="font-bold">Invite Code:</span>
-          <%= @organization.invite_code %>
-        </div>
-
-        <div>
-          <%= 
-            button_to "Regenerate Invite Code", 
-            regenerate_invite_code_organization_path(@organization), 
-            method: :patch, 
-            class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500" 
-          %>
+          <span class="font-bold">Name:</span>
+          <span data-inline-edit-target="name" class="editable"><%= @organization.name %></span>
+          <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
+            <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
+            <%=
+              form.submit "Save",
+                          data: { action: "inline-edit#save" },
+                          class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+            %>
+          <% end %>
         </div>
       </div>
-    </section>
-  </div>
+
+      <div class="flex flex-row gap-2 items-center">
+        <span class="font-bold">Invite Code:</span>
+        <%= @organization.invite_code %>
+      </div>
+
+      <div>
+        <%=
+          button_to "Regenerate Invite Code",
+                    regenerate_invite_code_organization_path(@organization),
+                    method: :patch,
+                    class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+        %>
+      </div>
+
+      <!-- Panelists Table -->
+      <div class="w-full mt-8">
+        <h2 class="text-2xl font-semibold mb-4">Panelists</h2>
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+          <thead class="bg-gray-200 text-gray-600">
+          <tr>
+            <th class="py-2 px-4 border-b">Email</th>
+            <th class="py-2 px-4 border-b">Created at</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @organization.panelists.each do |panelist| %>
+            <tr class="hover:bg-gray-100 text-center">
+              <td class="py-2 px-4 border-b"><%= panelist.email %></td>
+              <td class="py-2 px-4 border-b"><%= panelist.created_at.strftime("%B %d, %Y %H:%M") %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
 </body>
 </html>
