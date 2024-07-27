@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :organization do
-    name { 'Test Organization' }
-    invite_code { SecureRandom.hex(10) }
+    name { Faker::Company.name }
+    invite_code { SecureRandom.hex(4) }
   end
 end

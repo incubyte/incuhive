@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Organizations', type: :request do
+RSpec.describe 'Organizations' do
   let(:organization) { create(:organization) }
 
   describe 'GET /organizations/:id' do
     it 'renders the show template' do
       get organization_path(organization)
-      expect(response.body).to include('Show Organization')
+      expect(response.body).to include('Organization Details')
     end
 
     it 'handles non-existent organization' do
@@ -39,7 +39,7 @@ RSpec.describe 'Organizations', type: :request do
       post organizations_path, params: { organization: { name: 'Existing Name' } }
       expect(response).to redirect_to(new_organization_path)
       follow_redirect!
-      expect(response.body).to include('Organization name must be unique.')
+      expect(response.body).to include('Name has already been taken')
     end
   end
 
@@ -57,7 +57,7 @@ RSpec.describe 'Organizations', type: :request do
       patch organization_path(organization), params: { organization: { name: 'Existing Name' } }
       expect(response).to redirect_to(organization_path(organization))
       follow_redirect!
-      expect(response.body).to include('Organization name must be unique.')
+      expect(response.body).to include('Name has already been taken')
     end
 
     it 'handles non-existent organization' do
