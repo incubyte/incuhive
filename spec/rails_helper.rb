@@ -32,6 +32,11 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # Show full expected/got diff in failure messages
+  config.expect_with :rspec do |c|
+    c.max_formatted_output_length = nil
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 
