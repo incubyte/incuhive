@@ -55,9 +55,12 @@ cd incuhive
 - Install dependencies: `bundle install`
 - Database setup: `bundle exec rails db:setup`
 - Run tests: `bundle exec rspec`
-- Run server: `bundle exec rails server`
-- Run watcher for live reload and test auto run: `bundle exec guard`
 - Run formatter: `bundle exec rubocop -A`
+
+- Run dev server: `bin/dev`, this runs `Procfile.dev` using `foreman`:
+    - server: `bundle exec rails server`
+    - tailwind: `bundle rails tailwindcss:watch`
+    - watcher: `bundle exec guard`
 
 ## 🏗️ What's Next
 
