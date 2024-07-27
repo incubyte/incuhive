@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
-  before_action :organization, only: %i[show update]
+  before_action :organization, only: %i[show update regenerate_invite_code]
 
   def new
     @organization = Organization.new
@@ -34,6 +34,12 @@ class OrganizationsController < ApplicationController
     redirect_to organization_path(@organization)
   rescue ActiveRecord::RecordNotUnique
     flash[:alert] = "Organization name must be unique."
+    redirect_to organization_path(@organization)
+  end
+
+  def regenerate_invite_code
+    @organization.update(invite_code: generate_invite_code)
+    flash[:notice] = "Invite code regenerated successfully."
     redirect_to organization_path(@organization)
   end
 
