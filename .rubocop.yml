@@ -28,6 +28,8 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '**/**/schema.rb'
+    - 'Guardfile'
+    - '.pryrc'
 
 Style/Documentation:
   Enabled: false
