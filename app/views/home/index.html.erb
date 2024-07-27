@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Incuhive - Simplify Your Hiring Process</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #343a40;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .cta-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    .cta-button:hover {
+      background-color: #0056b3;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .feature {
+      flex: 1 1 30%;
+      margin: 10px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      min-width: 250px;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 120px;
+    }
+    .feature h3 {
+      color: #343a40;
+    }
+    @media (max-width: 768px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Welcome to Incuhive</h1>
+    <p>Streamlining the hiring process for your team</p>
+  </div>
+  <div class="content">
+    <h2>Why Choose Incuhive?</h2>
+    <p>Incuhive makes hiring easier with powerful features designed to streamline your hiring process.</p>
+    <button class="cta-button">Get Started</button>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <h3>Easy to use</h3>
+      <p>Anyone can use Incuhive, no training necessary</p>
+    </div>
+    <div class="feature">
+      <h3>Excel Interop</h3>
+      <p>Incuhive can both import and export to excel</p>
+    </div>
+  </div>
+</body>
+</html>
+
