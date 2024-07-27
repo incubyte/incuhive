@@ -1,0 +1,17 @@
+<h1>Show Organization</h1>
+
+<% if flash[:notice] %>
+  <p style="color: green;"><%= flash[:notice] %></p>
+<% elsif flash[:alert] %>
+  <p style="color: red;"><%= flash[:alert] %></p>
+<% end %>
+
+<div>
+  <strong>Name:</strong>
+  <%= @organization.name %>
+</div>
+
+<div>
+  <strong>Invite Code:</strong>
+  <%= @organization.invite_code %>
+</div>

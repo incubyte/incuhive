@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
+  before_action :organization, only: %i[show]
+
   def new
     @organization = Organization.new
+  end
+
+  def show
+    organization
   end
 
   def create
@@ -21,6 +27,10 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
+  def organization
+    @organization ||= Organization.find(params[:id])
+  end
 
   def organization_params
     params.require(:organization).permit(:name)
