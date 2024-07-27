@@ -6,9 +6,15 @@
   <p style="color: red;"><%= flash[:alert] %></p>
 <% end %>
 
-<div>
-  <strong>Name:</strong>
-  <%= @organization.name %>
+<div data-controller="inline-edit">
+  <div>
+    <strong>Name:</strong>
+    <span data-inline-edit-target="name" class="editable"><%= @organization.name %></span>
+    <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
+      <%= form.text_field :name, data: { inline_edit_target: "input" } %>
+      <%= form.submit "Save", data: { action: "inline-edit#save" } %>
+    <% end %>
+  </div>
 </div>
 
 <div>
