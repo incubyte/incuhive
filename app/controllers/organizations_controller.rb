@@ -12,7 +12,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      redirect_to new_organization_path, notice: 'Organization created successfully.'
+      redirect_to organization_path(@organization), notice: 'Organization created successfully.'
     else
       flash[:alert] = @organization.errors.full_messages.to_sentence
       redirect_to new_organization_path
