@@ -56,6 +56,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.4.3'
+  gem 'fuubar'
   gem 'guard'
   gem 'guard-livereload', '~> 2.5'
   gem 'guard-rspec'
