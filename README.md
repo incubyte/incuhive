@@ -23,7 +23,7 @@
 <h3>Easy to use hiring platform 💼🐝</h3>
 
 <figure>
-  <img src="images/screenshot.png" alt="incuhive in action">
+  <img src="docs/images/screenshot.png" alt="incuhive in action">
   <br/>
   <figcaption>incuhive in action</figcaption>
 </figure>
@@ -53,6 +53,25 @@ git clone https://github.com/2kabhishek/incuhive
 cd incuhive
 <install_command>
 ```
+
+### 🛠️ Development
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
 
 ## 🚀 Usage
 
