@@ -2,3 +2,30 @@ require:
   - rubocop-rails
   - rubocop-performance
   - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-capybara
+  - rubocop-factory_bot
+
+AllCops:
+  CacheRootDirectory: tmp/cache
+  MaxFilesInCache: 20000
+  NewCops: enable
+  TargetRailsVersion: 6.0
+  TargetRubyVersion: 3.0.0
+  UseCache: true
+  Exclude:
+    - '.git/**/*'
+    - 'app/assets/**/*'
+    - 'bin/*'
+    - 'config/*.yml'
+    - 'coverage/**/*'
+    - 'db/migrate/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '**/**/schema.rb'
+
+Style/Documentation:
+  Enabled: false
