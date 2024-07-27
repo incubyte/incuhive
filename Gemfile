@@ -55,6 +55,9 @@ group :development, :test do
   gem 'awesome_print'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.4.3'
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5'
+  gem 'guard-rspec'
   gem 'rspec-rails', '~> 6.1.0'
 
   gem 'pry-rails'
