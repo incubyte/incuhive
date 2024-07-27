@@ -26,4 +26,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_092138) do
     t.index ["reset_password_token"], name: "index_panelists_on_reset_password_token", unique: true
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "invite_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invite_code"], name: "index_organizations_on_invite_code", unique: true
+    t.index ["name"], name: "index_organizations_on_name", unique: true
+  end
+
 end
