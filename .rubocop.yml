@@ -33,3 +33,7 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 2
+
