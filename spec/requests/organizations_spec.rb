@@ -28,7 +28,7 @@ RSpec.describe 'Organizations' do
   describe 'POST /organizations' do
     it 'creates a new organization successfully' do
       post organizations_path, params: { organization: { name: 'New Organization' } }
-      expect(response).to redirect_to(new_organization_path)
+      expect(response).to redirect_to(organization_path(Organization.last))
       follow_redirect!
       expect(response.body).to include('Organization created successfully.')
       expect(Organization.last.name).to eq('New Organization')
