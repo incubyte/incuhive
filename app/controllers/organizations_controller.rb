@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
-  before_action :organization, only: %i[show]
+  before_action :organization, only: %i[show update]
 
   def new
     @organization = Organization.new
   end
 
   def show
-    organization
   end
 
   def create
@@ -24,6 +23,18 @@ class OrganizationsController < ApplicationController
   rescue ActiveRecord::RecordNotUnique
     flash[:alert] = "Organization name must be unique."
     redirect_to new_organization_path
+  end
+
+  def update
+    if @organization.update(organization_params)
+      flash[:notice] = "Organization updated successfully."
+    else
+      flash[:alert] = "Error updating organization."
+    end
+    redirect_to organization_path(@organization)
+  rescue ActiveRecord::RecordNotUnique
+    flash[:alert] = "Organization name must be unique."
+    redirect_to organization_path(@organization)
   end
 
   private
