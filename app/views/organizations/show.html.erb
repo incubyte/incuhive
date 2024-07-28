@@ -59,18 +59,26 @@
           <thead class="bg-gray-200 text-gray-600">
           <tr>
             <th class="py-2 px-4 border-b">
+              <%= t('organizations.show.panelists.columns.name') %>
+            </th>
+            <th class="py-2 px-4 border-b">
               <%= t('organizations.show.panelists.columns.email') %>
             </th>
             <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.created_at') %>
+              <%= t('organizations.show.panelists.columns.expertise') %>
+            </th>
+            <th class="py-2 px-4 border-b">
+              <%= t('organizations.show.panelists.columns.available_time_slots') %>
             </th>
           </tr>
           </thead>
           <tbody>
           <% @organization.panelists.each do |panelist| %>
             <tr class="hover:bg-gray-100 text-center">
+              <td class="py-2 px-4 border-b"><%= panelist.name %></td>
               <td class="py-2 px-4 border-b"><%= panelist.email %></td>
-              <td class="py-2 px-4 border-b"><%= panelist.created_at.strftime("%B %d, %Y %H:%M") %></td>
+              <td class="py-2 px-4 border-b"><%= panelist.expertise %></td>
+              <td class="py-2 px-4 border-b"><%= panelist.available_time_slots %></td>
             </tr>
           <% end %>
           </tbody>
