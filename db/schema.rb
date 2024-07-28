@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_093032) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "organization_id"
+    t.bigint "organization_id"
     t.string "name"
     t.string "available_time_slots", default: [], array: true
     t.string "expertise", default: [], array: true
