@@ -16,12 +16,20 @@
       <%= t('home.heading_why_answer') %>
     </p>
     <% if panelist_signed_in? %>
-      <div class="bg-gray-800 text-white py-2 px-4 rounded-md">
-        <span class="font-semibold">
-          <%= t('home.signed_in.welcome', email: current_panelist.email) %>
-        </span>
+      <span class="font-semibold">
+        <%= t('home.signed_in.welcome', email: current_panelist.email) %>
+      </span>
+      <div class="flex justify-center">
+        <%= link_to create_or_join_organizations_path, class: "mx-2 mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 flex items-center justify-center" do %>
+          <i class="fa-regular fa-building mr-2"></i>
+          <%= t('home.signed_in.go_to_org') %>
+        <% end %>
+
+      <%= button_to destroy_panelist_session_path, method: :delete, class: "mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 flex items-center justify-center" do %>
+        <i class="fa-solid fa-right-from-bracket mr-2"></i>
+        <%= t('home.signed_in.buttons.sign_out') %>
+      <% end %>
       </div>
-      <%= button_to t('home.signed_in.buttons.sign_out'), destroy_panelist_session_path, method: :delete, class: "mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600" %>
     <% else %>
       <%= button_to t('home.not_signed_in.buttons.get_started'), new_panelist_session_path, class: "bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
     <% end %>

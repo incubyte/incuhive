@@ -9,7 +9,7 @@ FactoryBot.define do
     location { 'MyString' }
     total_experience { 1 }
     relevant_experience { 1 }
-    skills { 'MyString' }
+    skills { ['MyString'] }
     notice_period { 1 }
     resume_link { 'MyString' }
     linkedin_link { 'MyString' }
