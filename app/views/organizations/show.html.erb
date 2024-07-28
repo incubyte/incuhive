@@ -2,8 +2,13 @@
 <div class="container">
   <section class="w-full bg-gray-100">
     <div class="flex flex-col items-center gap-4 py-4 text-lg">
-
       <div class="flex items-center gap-4 py-4 text-lg">
+        <div>
+          <%= link_to root_path, class: "cursor-pointer rounded-md border border-blue-600 bg-blue-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500" do %>
+            <i class="fa-solid fa-house"></i>
+            <%= t('organizations.show.fields.labels.home') %>
+          <% end %>
+        </div>
         <div data-controller="inline-edit">
           <div class="flex flex-row gap-2 items-center">
             <span data-inline-edit-target="name" class="editable font-bold"><%= @organization.name %></span>
@@ -31,7 +36,7 @@
 
         <div>
           <%= link_to leave_organization_path(@organization), method: :delete,
-                      class: "cursor-pointer rounded-md border border-red-600 bg-red-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-indigo-500" do %>
+                      class: "cursor-pointer rounded-md border border-red-600 bg-red-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" do %>
             <%= t('organizations.show.fields.labels.leave') %>
             <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
           <% end %>
