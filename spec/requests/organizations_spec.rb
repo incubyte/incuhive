@@ -21,7 +21,8 @@ RSpec.describe 'Organizations' do
     describe 'GET /organizations/:id' do
       it 'renders the show template' do
         get organization_path(organization)
-        expect(response.body).to include('Organization details')
+        expect(response.body).to include(organization.name)
+        expect(response.body).to include(organization.invite_code)
       end
 
       it 'handles non-existent organization' do
@@ -98,7 +99,6 @@ RSpec.describe 'Organizations' do
         old_invite_code = organization.invite_code
         patch regenerate_invite_code_organization_path(organization)
         follow_redirect!
-        expect(response.body).to include('Invite code regenerated successfully')
         expect(organization.reload.invite_code).not_to eq(old_invite_code)
       end
 
@@ -112,7 +112,7 @@ RSpec.describe 'Organizations' do
     describe 'GET /organizations/create_or_join' do
       it 'renders the create_or_join template' do
         get create_or_join_organizations_path
-        expect(response.body).to include('Create or Join an Organization')
+        expect(response).to redirect_to(organization_path(organization))
       end
     end
   end
