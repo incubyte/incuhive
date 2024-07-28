@@ -23,7 +23,7 @@ RSpec.describe 'home/index.html.erb' do
     end
 
     it 'greets the signed-in panelist' do
-      expect(rendered).to have_content('Welcome test@example.com')
+      expect(rendered).to have_content('Welcome back, test@example.com!')
     end
 
     it 'shows the sign out button' do

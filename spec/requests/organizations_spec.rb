@@ -39,9 +39,13 @@ RSpec.describe 'Organizations' do
     end
 
     describe 'POST /organizations' do
-      it 'creates a new organization successfully' do
+      it 'redirects to organization show page on success' do
         post organizations_path, params: { organization: { name: 'New Organization' } }
         expect(response).to redirect_to(organization_path(Organization.last))
+      end
+
+      it 'creates a new organization successfully' do
+        post organizations_path, params: { organization: { name: 'New Organization' } }
         follow_redirect!
         expect(response.body).to include('Organization created successfully')
         expect(Organization.last.name).to eq('New Organization')
@@ -57,9 +61,13 @@ RSpec.describe 'Organizations' do
     end
 
     describe 'PATCH /organizations/:id' do
-      it 'updates the organization name successfully' do
+      it 'redirects to organization show page on success' do
         patch organization_path(organization), params: { organization: { name: 'New Name' } }
         expect(response).to redirect_to(organization_path(organization))
+      end
+
+      it 'updates the organization name successfully' do
+        patch organization_path(organization), params: { organization: { name: 'New Name' } }
         follow_redirect!
         expect(response.body).to include('Organization updated successfully')
         expect(organization.reload.name).to eq('New Name')
@@ -81,10 +89,14 @@ RSpec.describe 'Organizations' do
     end
 
     describe 'PATCH /organizations/:id/regenerate_invite_code' do
+      it 'redirects to organization show page on success' do
+        patch regenerate_invite_code_organization_path(organization)
+        expect(response).to redirect_to(organization_path(organization))
+      end
+
       it 'regenerates the invite code successfully' do
         old_invite_code = organization.invite_code
         patch regenerate_invite_code_organization_path(organization)
-        expect(response).to redirect_to(organization_path(organization))
         follow_redirect!
         expect(response.body).to include('Invite code regenerated successfully')
         expect(organization.reload.invite_code).not_to eq(old_invite_code)
@@ -100,7 +112,7 @@ RSpec.describe 'Organizations' do
     describe 'GET /organizations/create_or_join' do
       it 'renders the create_or_join template' do
         get create_or_join_organizations_path
-        expect(response.body).to include('Create or Join Organization')
+        expect(response.body).to include('Create or Join an Organization')
       end
     end
   end
