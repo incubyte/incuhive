@@ -17,6 +17,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
+      current_panelist.update(organization: @organization)
       redirect_to organization_path(@organization), notice: I18n.t('organizations.create.success')
     else
       flash[:alert] = @organization.errors.full_messages.to_sentence
