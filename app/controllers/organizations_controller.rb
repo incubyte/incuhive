@@ -12,7 +12,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      redirect_to organization_path(@organization), notice: 'Organization created successfully.'
+      redirect_to organization_path(@organization), notice: I18n.t('organizations.create.success')
     else
       flash[:alert] = @organization.errors.full_messages.to_sentence
       redirect_to new_organization_path
@@ -21,7 +21,7 @@ class OrganizationsController < ApplicationController
 
   def update
     if @organization.update(organization_params)
-      redirect_to organization_path(@organization), notice: 'Organization updated successfully.'
+      redirect_to organization_path(@organization), notice: I18n.t('organizations.update.success')
     else
       flash[:alert] = @organization.errors.full_messages.to_sentence
       redirect_to organization_path(@organization)
@@ -30,7 +30,7 @@ class OrganizationsController < ApplicationController
 
   def regenerate_invite_code
     @organization.regenerate_invite_code
-    redirect_to organization_path(@organization), notice: 'Invite code regenerated successfully.'
+    redirect_to organization_path(@organization), notice: I18n.t('organizations.regenerate_invite_code.success')
   end
 
   private
