@@ -65,8 +65,6 @@ en:
         placeholders:
           name: 'Name'
     show:
-      heading: 'Organization'
-      subheading: 'Organization details'
       fields:
         info_name: '* Click on the name to edit.'
         labels:

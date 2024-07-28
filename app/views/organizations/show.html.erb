@@ -1,69 +1,51 @@
 <body class="bg-gray-100">
 <div class="container">
   <section class="w-full bg-gray-100">
-    <div class="bg-gray-800 text-white text-center py-6">
-      <h1 class="text-3xl font-semibold">
-        <%= t('organizations.show.heading') %>
-      </h1>
-      <p class="text-lg">
-        <%= t('organizations.show.subheading') %>
-      </p>
-    </div>
-
     <div class="flex flex-col items-center gap-4 py-4 text-lg">
-      <div class="bg-transparent py-1 px-8 text-cyan-500 text-sm rounded-md w-fit">
-        <p>
-          <%= t('organizations.show.fields.info_name') %>
-        </p>
-      </div>
 
-      <div data-controller="inline-edit">
+      <div class="flex items-center gap-4 py-4 text-lg">
+        <div data-controller="inline-edit">
+          <div class="flex flex-row gap-2 items-center">
+            <span data-inline-edit-target="name" class="editable font-bold"><%= @organization.name %></span>
+            <i class="fa-regular fa-pen-to-square text-blue-600 hover:text-blue-800 cursor-pointer" data-inline-edit-target="editIcon"></i>
+            <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
+              <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
+              <%=
+                form.submit t('organizations.show.buttons.save_name'),
+                            data: { action: "inline-edit#save" },
+                            class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+              %>
+            <% end %>
+          </div>
+        </div>
+
         <div class="flex flex-row gap-2 items-center">
-          <span class="font-bold">
-            <%= t('organizations.show.fields.labels.name') %>
+          <%= t('organizations.show.fields.labels.invite_code') %>
+            <span class="font-bold">
+          <%= @organization.invite_code %>
           </span>
-          <span data-inline-edit-target="name" class="editable"><%= @organization.name %></span>
-          <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
-            <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
-            <%=
-              form.submit t('organizations.show.buttons.save_name'),
-                          data: { action: "inline-edit#save" },
-                          class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-            %>
+          <%= button_to regenerate_invite_code_organization_path(@organization), method: :patch, class: "text-indigo-600 hover:text-indigo-800" do %>
+            <i class="fa-solid fa-rotate"></i>
+          <% end %>
+        </div>
+
+        <div>
+          <%= link_to leave_organization_path(@organization), method: :delete,
+                      class: "cursor-pointer rounded-md border border-red-600 bg-red-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-indigo-500" do %>
+            <%= t('organizations.show.fields.labels.leave') %>
+            <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
           <% end %>
         </div>
       </div>
 
-      <div class="flex flex-row gap-2 items-center">
-        <span class="font-bold">
-          <%= t('organizations.show.fields.labels.invite_code') %>
-        </span>
-        <%= @organization.invite_code %>
-      </div>
-
-      <div>
-        <%=
-          button_to t('organizations.show.buttons.regenerate_invite_code'),
-                    regenerate_invite_code_organization_path(@organization),
-                    method: :patch,
-                    class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-        %>
-      </div>
-
-      <div>
-        <%= button_to t('organizations.show.buttons.leave_organization'), leave_organization_path(@organization),
-                      method: :delete,
-                    class: "cursor-pointer rounded-md border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium
-                    text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" %>
-      </div>
 
       <!-- Candidates Table -->
       <div class="w-full mt-8">
         <h2 class="text-2xl font-semibold mb-4 flex justify-between">
           <%= t('organizations.show.candidates.title') %>
-          <%= link_to t('organizations.show.buttons.create_candidate'), new_candidate_path,
-                      class: "cursor-pointer rounded-md border border-green-600 bg-green-600 px-12 py-3 text-sm font-medium
-                    text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-indigo-500" %>
+          <%= link_to new_candidate_path, class: "cursor-pointer rounded-md border border-green-600 bg-green-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-indigo-500" do %>
+            <i class="fa-regular fa-square-plus text-3xl"></i>
+          <% end %>
         </h2>
         <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
           <thead class="bg-gray-200 text-gray-600">
