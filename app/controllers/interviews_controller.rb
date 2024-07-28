@@ -5,8 +5,19 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
+  def show_all
+    @interviews = Interview.where(candidate_id: params[:candidate_id])
+    render :index
+  end
+
   def new
     @interview = Interview.new
+    @organization = current_panelist.organization
+    @panelists = @organization.panelists
+  end
+
+  def edit
+    @interview = Interview.find(params[:id])
     @organization = current_panelist.organization
     @panelists = @organization.panelists
   end
