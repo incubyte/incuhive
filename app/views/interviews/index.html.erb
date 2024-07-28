@@ -5,8 +5,10 @@
 <div id="interviews">
   <% @interviews.each do |interview| %>
     <%= render interview %>
-    <%= link_to "Edit", edit_for_candidate_interviews_path(interview, interview.candidate) %>
+    <%= link_to "Edit",
+    edit_for_candidate_interviews_path(interview, interview.candidate) %>
   <% end %>
 </div>
 
-<%= link_to "New interview", schedule_for_candidate_interviews_path(@interviews.first.candidate) %>
+<%= link_to "New interview",
+schedule_for_candidate_interviews_path(@interviews.first.candidate) %>

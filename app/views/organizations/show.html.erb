@@ -1,146 +1,154 @@
 <body class="bg-gray-100">
-<div class="container">
-  <section class="w-full bg-gray-100">
-    <div class="flex flex-col items-center gap-4 py-4 text-lg">
-      <div class="flex items-center gap-4 py-4 text-lg">
-        <div>
-          <%= link_to root_path, class: "cursor-pointer rounded-md border border-blue-600 bg-blue-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500" do %>
-            <i class="fa-solid fa-house"></i>
-            <%= t('organizations.show.fields.labels.home') %>
-          <% end %>
-        </div>
-        <div data-controller="inline-edit">
+  <div class="container">
+    <section class="w-full bg-gray-100">
+      <div class="flex flex-col items-center gap-4 py-4 text-lg">
+        <div class="flex items-center gap-4 py-4 text-lg">
+          <div>
+            <%= link_to root_path, class: "cursor-pointer rounded-md border border-blue-600 bg-blue-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500" do %>
+              <i class="fa-solid fa-house"></i>
+              <%= t("organizations.show.fields.labels.home") %>
+            <% end %>
+          </div>
+          <div data-controller="inline-edit">
+            <div class="flex flex-row gap-2 items-center">
+              <span data-inline-edit-target="name" class="editable font-bold"><%= @organization.name %></span>
+              <i
+                class="
+                  fa-solid fa-pencil text-blue-600 hover:text-blue-800 cursor-pointer
+                "
+                data-inline-edit-target="editIcon"
+              ></i>
+              <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
+                <%= form.text_field :name,
+                                data: {
+                                  inline_edit_target: "input",
+                                },
+                                class:
+                                  "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
+                <%= form.submit t("organizations.show.buttons.save_name"),
+                            data: {
+                              action: "inline-edit#save",
+                            },
+                            class:
+                              "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500" %>
+              <% end %>
+            </div>
+          </div>
+
           <div class="flex flex-row gap-2 items-center">
-            <span data-inline-edit-target="name" class="editable font-bold"><%= @organization.name %></span>
-            <i class="fa-solid fa-pencil text-blue-600 hover:text-blue-800 cursor-pointer" data-inline-edit-target="editIcon"></i>
-            <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
-              <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
-              <%=
-                form.submit t('organizations.show.buttons.save_name'),
-                            data: { action: "inline-edit#save" },
-                            class: "cursor-pointer rounded-md border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-              %>
+            <%= t("organizations.show.fields.labels.invite_code") %>
+            <span class="font-bold">
+              <%= @organization.invite_code %>
+            </span>
+            <%= button_to regenerate_invite_code_organization_path(@organization), method: :patch, class: "text-indigo-600 hover:text-indigo-800" do %>
+              <i class="fa-solid fa-rotate"></i>
+            <% end %>
+          </div>
+
+          <div>
+            <%= link_to leave_organization_path(@organization), method: :delete,
+                      class: "cursor-pointer rounded-md border border-red-600 bg-red-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" do %>
+              <%= t("organizations.show.fields.labels.leave") %>
+              <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
             <% end %>
           </div>
         </div>
-
-        <div class="flex flex-row gap-2 items-center">
-          <%= t('organizations.show.fields.labels.invite_code') %>
-            <span class="font-bold">
-          <%= @organization.invite_code %>
-          </span>
-          <%= button_to regenerate_invite_code_organization_path(@organization), method: :patch, class: "text-indigo-600 hover:text-indigo-800" do %>
-            <i class="fa-solid fa-rotate"></i>
-          <% end %>
+        <!-- Candidates Table -->
+        <div class="w-full mt-8">
+          <h2 class="text-2xl font-semibold mb-4 flex justify-between">
+            <%= t("organizations.show.candidates.title") %>
+            <%= link_to new_candidate_path, class: "cursor-pointer rounded-md border border-green-600 bg-green-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-indigo-500" do %>
+              <i class="fa-regular fa-square-plus text-3xl"></i>
+            <% end %>
+          </h2>
+          <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead class="bg-gray-200 text-gray-600">
+              <tr>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.name") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.email") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.skills") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.relevant_experience") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.current_role") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.applied_role") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.actions") %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @organization.candidates.each do |candidate| %>
+                <tr class="hover:bg-gray-100 text-center">
+                  <td class="py-2 px-4 border-b"><%= candidate.name %></td>
+                  <td class="py-2 px-4 border-b"><%= candidate.email %></td>
+                  <td class="py-2 px-4 border-b"><%= candidate.skills %></td>
+                  <td class="py-2 px-4 border-b"><%= candidate.relevant_experience %></td>
+                  <td class="py-2 px-4 border-b"><%= candidate.current_role %></td>
+                  <td class="py-2 px-4 border-b"><%= candidate.applied_role %></td>
+                  <td class="py-2 px-4 border-b">
+                    <%= link_to edit_candidate_path(candidate), class: "text-gray-500 hover:text-gray-500" do %>
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    <% end %>
+                    <%= link_to schedule_for_candidate_interviews_path(candidate), method: :get, class: "text-blue-800 hover:text-blue-800" do %>
+                      <i class="fa-regular fa-calendar-plus"></i>
+                    <% end %>
+                    <% if candidate.interviews.any? %>
+                      <%= link_to show_all_for_candidate_interviews_path(candidate), method: :get, class: "text-green-800 hover:text-green-800" do %>
+                        <i class="fa-regular fa-calendar-check"></i>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-
-        <div>
-          <%= link_to leave_organization_path(@organization), method: :delete,
-                      class: "cursor-pointer rounded-md border border-red-600 bg-red-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" do %>
-            <%= t('organizations.show.fields.labels.leave') %>
-            <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
-          <% end %>
+        <!-- Panelists Table -->
+        <div class="w-full mt-8">
+          <h2 class="text-2xl font-semibold mb-4">
+            <%= t("organizations.show.panelists.title") %>
+          </h2>
+          <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead class="bg-gray-200 text-gray-600">
+              <tr>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.name") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.email") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.expertise") %>
+                </th>
+                <th class="py-2 px-4 border-b">
+                  <%= t("organizations.show.panelists.columns.available_time_slots") %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @organization.panelists.each do |panelist| %>
+                <tr class="hover:bg-gray-100 text-center">
+                  <td class="py-2 px-4 border-b"><%= panelist.name %></td>
+                  <td class="py-2 px-4 border-b"><%= panelist.email %></td>
+                  <td class="py-2 px-4 border-b"><%= panelist.expertise %></td>
+                  <td class="py-2 px-4 border-b"><%= panelist.available_time_slots %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
-
-
-      <!-- Candidates Table -->
-      <div class="w-full mt-8">
-        <h2 class="text-2xl font-semibold mb-4 flex justify-between">
-          <%= t('organizations.show.candidates.title') %>
-          <%= link_to new_candidate_path, class: "cursor-pointer rounded-md border border-green-600 bg-green-600 p-2 px-3 text-sm font-medium text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-indigo-500" do %>
-            <i class="fa-regular fa-square-plus text-3xl"></i>
-          <% end %>
-        </h2>
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-          <thead class="bg-gray-200 text-gray-600">
-          <tr>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.name') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.email') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.skills') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.relevant_experience') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.current_role') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.applied_role') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.actions') %>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @organization.candidates.each do |candidate| %>
-            <tr class="hover:bg-gray-100 text-center">
-              <td class="py-2 px-4 border-b"><%= candidate.name %></td>
-              <td class="py-2 px-4 border-b"><%= candidate.email %></td>
-              <td class="py-2 px-4 border-b"><%= candidate.skills %></td>
-              <td class="py-2 px-4 border-b"><%= candidate.relevant_experience %></td>
-              <td class="py-2 px-4 border-b"><%= candidate.current_role %></td>
-              <td class="py-2 px-4 border-b"><%= candidate.applied_role %></td>
-              <td class="py-2 px-4 border-b">
-                <%= link_to edit_candidate_path(candidate), class: "text-gray-500 hover:text-gray-500" do %>
-                  <i class="fa-regular fa-pen-to-square"></i>
-                <% end %>
-                <%= link_to schedule_for_candidate_interviews_path(candidate), method: :get, class: "text-blue-800 hover:text-blue-800" do %>
-                  <i class="fa-regular fa-calendar-plus"></i>
-                <% end %>
-                <% if candidate.interviews.any? %>
-                  <%= link_to show_all_for_candidate_interviews_path(candidate), method: :get, class: "text-green-800 hover:text-green-800" do %>
-                    <i class="fa-regular fa-calendar-check"></i>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Panelists Table -->
-      <div class="w-full mt-8">
-        <h2 class="text-2xl font-semibold mb-4">
-          <%= t('organizations.show.panelists.title') %>
-        </h2>
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-          <thead class="bg-gray-200 text-gray-600">
-          <tr>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.name') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.email') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.expertise') %>
-            </th>
-            <th class="py-2 px-4 border-b">
-              <%= t('organizations.show.panelists.columns.available_time_slots') %>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @organization.panelists.each do |panelist| %>
-            <tr class="hover:bg-gray-100 text-center">
-              <td class="py-2 px-4 border-b"><%= panelist.name %></td>
-              <td class="py-2 px-4 border-b"><%= panelist.email %></td>
-              <td class="py-2 px-4 border-b"><%= panelist.expertise %></td>
-              <td class="py-2 px-4 border-b"><%= panelist.available_time_slots %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 </body>
