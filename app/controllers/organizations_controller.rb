@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
+  before_action :authenticate_panelist!
   before_action :set_organization, only: %i[show update regenerate_invite_code]
 
   def show; end
