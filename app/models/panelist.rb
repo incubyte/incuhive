@@ -6,7 +6,7 @@ class Panelist < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :organization, dependent: nil, optional: true
+  belongs_to :organization, optional: true
   has_many :interviews, dependent: :nullify
 
   validates :email, presence: true, uniqueness: true
