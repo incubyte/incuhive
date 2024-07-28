@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   resources :organizations, only: %i[new create show update] do
     get :create_or_join, on: :collection
     patch :regenerate_invite_code, on: :member
+    post :join, on: :collection
   end
 end

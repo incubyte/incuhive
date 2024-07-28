@@ -15,9 +15,13 @@
         <a href="<%= new_organization_path %>" class="w-full md:w-1/2 bg-gray-800 text-white text-center py-4 px-6 rounded-lg mb-4">
           <%= t('organizations.create_or_join.buttons.create') %>
         </a>
-        <a href="#" class="w-full md:w-1/2 bg-gray-800 text-white text-center py-4 px-6 rounded-lg">
-          <%= t('organizations.create_or_join.buttons.join') %>
-        </a>
+        <form action="<%= join_organizations_path %>" method="post" class="w-full md:w-1/2 flex items-center">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="text" name="organization_code" placeholder="Enter Organization Code" class="flex-grow py-2 px-4 rounded-l-lg border border-gray-300">
+          <button type="submit" class="bg-gray-800 text-white py-2 px-6 rounded-r-lg">
+            <%= t('organizations.create_or_join.buttons.join') %>
+          </button>
+        </form>
       </div>
     </div>
   </section>
