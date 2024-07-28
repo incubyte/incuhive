@@ -53,7 +53,7 @@ class OrganizationsController < ApplicationController
 
   def regenerate_invite_code
     @organization.regenerate_invite_code
-    redirect_to organization_path(@organization), notice: I18n.t('organizations.regenerate_invite_code.success')
+    redirect_to organization_path(@organization)
   end
 
   private
