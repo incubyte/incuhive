@@ -34,8 +34,8 @@ Incuhive is a hiring platform that helps you simplify the hiring process.
 
 ## ✨ Features
 
--
-- Works with [mkrepo](https://github.com/incubyte/mkrepo)
+- Simple to use
+- Excel import / export (WIP)
 
 ## ⚡ Setup
 
