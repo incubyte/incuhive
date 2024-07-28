@@ -1,0 +1,44 @@
+<%= form_with(model: interview) do |form| %>
+  <% if interview.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
+
+      <ul>
+        <% interview.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :round, style: "display: block" %>
+    <%= form.text_field :round %>
+  </div>
+
+  <div>
+    <%= form.label :verdict, style: "display: block" %>
+    <%= form.check_box :verdict %>
+  </div>
+
+  <div>
+    <%= form.label :feedback, style: "display: block" %>
+    <%= form.text_area :feedback %>
+  </div>
+
+  <div>
+    <%= form.label :start_time, style: "display: block" %>
+    <%= form.datetime_field :start_time, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :panelist_id, "Select Panelist", style: "display: block" %>
+    <%= form.collection_select :panelist_id, @panelists, :id, :email, prompt: "Choose a panelist", selected: @panelists.first.id %>
+  </div>
+
+  <%= form.hidden_field :candidate_id, value: params[:candidate_id] %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
