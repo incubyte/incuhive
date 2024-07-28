@@ -7,3 +7,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+organization = FactoryBot.create(:organization)
+
+5.times do
+  FactoryBot.create(:panelist, organization: organization)
+end
