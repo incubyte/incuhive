@@ -36,6 +36,7 @@ Incuhive is a hiring platform that helps you simplify the hiring process.
 
 - Simple to use
 - Excel import / export (WIP)
+- Built on rails
 
 ## ⚡ Setup
 
