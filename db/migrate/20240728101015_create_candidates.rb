@@ -4,7 +4,7 @@ class CreateCandidates < ActiveRecord::Migration[7.0]
   def change
     create_table :candidates do |t|
       t.string :name, null: false
-      t.string :email, null: false, unique: true
+      t.string :email, null: false, index: { unique: true }
       t.string :current_role
       t.string :applied_role
       t.string :location
