@@ -50,7 +50,7 @@ gem 'tailwindcss-rails', '~> 2.6'
 gem 'devise', '~> 4.9'
 
 # Icons
-gem "font-awesome-sass", "~> 6.5"
+gem 'font-awesome-sass', '~> 6.5'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
