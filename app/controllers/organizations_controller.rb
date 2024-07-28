@@ -34,6 +34,16 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def join
+    organization = Organization.find_by(invite_code: params[:organization_code])
+    if organization
+      current_panelist.update(organization: organization)
+      redirect_to organization_path(organization), notice: 'Successfully joined the organization.'
+    else
+      redirect_to create_or_join_organizations_path, alert: 'Invalid organization code.'
+    end
+  end
+
   def regenerate_invite_code
     @organization.regenerate_invite_code
     redirect_to organization_path(@organization), notice: I18n.t('organizations.regenerate_invite_code.success')
