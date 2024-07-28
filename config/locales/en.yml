@@ -31,3 +31,52 @@
 
 en:
   hello: "Hello world"
+
+  home:
+    heading: 'Welcome to Incuhive'
+    subheading: 'Streamlining the hiring process for your team'
+    heading_why: 'Why Choose Incuhive?'
+    heading_why_answer: 'Incuhive makes hiring easier with powerful features designed to streamline your hiring process.'
+    signed_in:
+      welcome: 'Welcome back, %{email}!'
+      subheading: 'Here are your organizations'
+      buttons:
+        sign_out: 'Sign out'
+    not_signed_in:
+      buttons:
+        get_started: 'Get Started'
+    benefits:
+      easy_to_use: 'Easy to use'
+      easy_to_use_desc: 'Anyone can use Incuhive, no training necessary'
+      excel_interop: 'Excel Interop'
+      excel_interop_desc: 'Incuhive can both import and export to Excel'
+
+  organizations:
+    new:
+      heading: 'Create Organization'
+      subheading: 'Create a new organization'
+      fields:
+        placeholders:
+          name: 'Name'
+    show:
+      heading: 'Organization'
+      subheading: 'Organization details'
+      fields:
+        info_name: '* Click on the name to edit.'
+        labels:
+          name: 'Name:'
+          invite_code: 'Invite Code:'
+      buttons:
+        save_name: 'Save'
+        regenerate_invite_code: 'Regenerate Invite Code'
+      panelists:
+        title: 'Panelists'
+        columns:
+          email: 'Email'
+          created_at: 'Created At'
+    create:
+      success: "Organization created successfully"
+    update:
+      success: "Organization updated successfully"
+    regenerate_invite_code:
+      success: "Invite code regenerated successfully"
