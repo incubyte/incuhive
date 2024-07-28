@@ -11,8 +11,8 @@ RSpec.describe 'Organizations' do
   end
 
   context 'when authenticated' do
-    let(:panelist) { create(:panelist) }
     let(:organization) { create(:organization) }
+    let(:panelist) { create(:panelist, organization: organization) }
 
     before do
       sign_in panelist
