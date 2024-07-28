@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   resources :candidates
 
-  resources :interviews, only: %i[new create update show] do
+  resources :interviews do
+    get 'edit/:id/:candidate_id', to: 'interviews#edit', as: 'edit_for_candidate', on: :collection
     get 'new/:candidate_id', to: 'interviews#new', as: 'schedule_for_candidate', on: :collection
+    get 'show_all/:candidate_id', to: 'interviews#show_all', as: 'show_all_for_candidate', on: :collection
   end
 end
