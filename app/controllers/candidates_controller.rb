@@ -24,6 +24,7 @@ class CandidatesController < ApplicationController
   def create
     @candidate = Candidate.new(candidate_params)
     @candidate.organization_id = current_panelist.organization.id
+    @candidate.skills = candidate_params[:skills].split(',')
 
     respond_to do |format|
       if @candidate.save
@@ -38,6 +39,8 @@ class CandidatesController < ApplicationController
 
   # PATCH/PUT /candidates/1 or /candidates/1.json
   def update
+    @candidate.skills = candidate_params[:skills].split(',')
+
     respond_to do |format|
       if @candidate.update(candidate_params)
         format.html { redirect_to candidate_url(@candidate), notice: 'Candidate was successfully updated.' }

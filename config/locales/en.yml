@@ -75,11 +75,10 @@ en:
       buttons:
         save_name: 'Save'
         regenerate_invite_code: 'Regenerate Invite Code'
+      candidates:
+        title: 'Candidates'
       panelists:
         title: 'Panelists'
-        columns:
-          email: 'Email'
-          created_at: 'Created At'
     create:
       success: "Organization created successfully"
     update:
