@@ -2,6 +2,7 @@
 
 class Organization < ApplicationRecord
   has_many :panelists, dependent: :nullify
+  has_many :candidates, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
   validates :invite_code, presence: true, uniqueness: true, length: { is: 8 }

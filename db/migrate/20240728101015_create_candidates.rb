@@ -19,6 +19,7 @@ class CreateCandidates < ActiveRecord::Migration[7.0]
       t.string :company_name
       t.text :feedback
       t.boolean :offer_given
+      t.references :organization, null: false, foreign_key: true
 
       t.timestamps
     end

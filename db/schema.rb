@@ -31,8 +31,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.string "company_name"
     t.text "feedback"
     t.boolean "offer_given"
+    t.bigint "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_candidates_on_organization_id"
   end
 
   create_table "interviews", force: :cascade do |t|
@@ -71,5 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.index ["reset_password_token"], name: "index_panelists_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "candidates", "organizations"
   add_foreign_key "panelists", "organizations"
 end
