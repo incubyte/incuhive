@@ -23,7 +23,7 @@
 <h3>Easy to use hiring platform 💼🐝</h3>
 
 <figure>
-  <img src="docs/images/screenshot.png" alt="incuhive in action">
+  <img src="docs/images/screenshot.jpg" alt="incuhive in action">
   <br/>
   <figcaption>incuhive in action</figcaption>
 </figure>
