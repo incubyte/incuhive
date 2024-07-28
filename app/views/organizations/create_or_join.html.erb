@@ -1,0 +1,25 @@
+<body class="bg-gray-100">
+<div class="container">
+  <section class="w-full bg-gray-100">
+    <div class="bg-gray-800 text-white text-center py-6">
+      <h1 class="text-3xl font-semibold">
+        <%= t('organizations.create_or_join.heading') %>
+      </h1>
+      <p class="text-lg">
+        <%= t('organizations.create_or_join.subheading') %>
+      </p>
+    </div>
+
+    <div class="py-10 px-4">
+      <div class="flex flex-col items-center">
+        <a href="<%= new_organization_path %>" class="w-full md:w-1/2 bg-gray-800 text-white text-center py-4 px-6 rounded-lg mb-4">
+          <%= t('organizations.create_or_join.buttons.create') %>
+        </a>
+        <a href="#" class="w-full md:w-1/2 bg-gray-800 text-white text-center py-4 px-6 rounded-lg">
+          <%= t('organizations.create_or_join.buttons.join') %>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+</body>

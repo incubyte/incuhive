@@ -52,6 +52,12 @@ en:
       excel_interop_desc: 'Incuhive can both import and export to Excel'
 
   organizations:
+    create_or_join:
+      heading: 'Create or Join an Organization'
+      subheading: 'Enter an invite code to join an organization or create a new one'
+      buttons:
+          join: 'Join'
+          create: 'Create'
     new:
       heading: 'Create Organization'
       subheading: 'Create a new organization'

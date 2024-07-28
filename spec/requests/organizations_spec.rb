@@ -96,5 +96,12 @@ RSpec.describe 'Organizations' do
         end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
+
+    describe 'GET /organizations/create_or_join' do
+      it 'renders the create_or_join template' do
+        get create_or_join_organizations_path
+        expect(response.body).to include('Create or Join Organization')
+      end
+    end
   end
 end

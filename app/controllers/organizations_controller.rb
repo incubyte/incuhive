@@ -4,6 +4,8 @@ class OrganizationsController < ApplicationController
   before_action :authenticate_panelist!
   before_action :set_organization, only: %i[show update regenerate_invite_code]
 
+  def create_or_join; end
+
   def show; end
 
   def new
