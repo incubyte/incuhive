@@ -6,7 +6,9 @@ class OrganizationsController < ApplicationController
 
   def create_or_join; end
 
-  def show; end
+  def show
+    redirect_to root_path unless @organization.panelists.include?(current_panelist)
+  end
 
   def new
     @organization = Organization.new
