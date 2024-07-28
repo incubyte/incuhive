@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
   resources :organizations, only: %i[new create show update] do
+    get :create_or_join, on: :collection
     patch :regenerate_invite_code, on: :member
   end
 end
