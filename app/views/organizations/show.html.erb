@@ -12,7 +12,7 @@
         <div data-controller="inline-edit">
           <div class="flex flex-row gap-2 items-center">
             <span data-inline-edit-target="name" class="editable font-bold"><%= @organization.name %></span>
-            <i class="fa-regular fa-pen-to-square text-blue-600 hover:text-blue-800 cursor-pointer" data-inline-edit-target="editIcon"></i>
+            <i class="fa-solid fa-pencil text-blue-600 hover:text-blue-800 cursor-pointer" data-inline-edit-target="editIcon"></i>
             <%= form_with model: @organization, local: true, data: { inline_edit_target: "form" }, class: "hidden" do |form| %>
               <%= form.text_field :name, data: { inline_edit_target: "input" }, class: "w-[300px] mt-1 rounded-md border-gray-200 shadow-sm sm:text-md py-3" %>
               <%=
@@ -73,6 +73,9 @@
             <th class="py-2 px-4 border-b">
               <%= t('organizations.show.panelists.columns.applied_role') %>
             </th>
+            <th class="py-2 px-4 border-b">
+              <%= t('organizations.show.panelists.columns.actions') %>
+            </th>
           </tr>
           </thead>
           <tbody>
@@ -84,6 +87,14 @@
               <td class="py-2 px-4 border-b"><%= candidate.relevant_experience %></td>
               <td class="py-2 px-4 border-b"><%= candidate.current_role %></td>
               <td class="py-2 px-4 border-b"><%= candidate.applied_role %></td>
+              <td class="py-2 px-4 border-b">
+                <%= link_to edit_candidate_path(candidate), class: "text-gray-500 hover:text-gray-500" do %>
+                  <i class="fa-regular fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to schedule_for_candidate_interviews_path(candidate), method: :get, class: "text-green-800 hover:text-green-800" do %>
+                  <i class="fa-regular fa-calendar-plus"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
           </tbody>

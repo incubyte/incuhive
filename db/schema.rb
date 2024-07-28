@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_28_131216) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,9 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.string "round"
     t.boolean "verdict"
     t.text "feedback"
-    t.datetime "start_time"
+    t.datetime "start_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "panelist_id", null: false
+    t.bigint "candidate_id", null: false
+    t.index ["candidate_id"], name: "index_interviews_on_candidate_id"
+    t.index ["panelist_id"], name: "index_interviews_on_panelist_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -75,5 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
   end
 
   add_foreign_key "candidates", "organizations"
+  add_foreign_key "interviews", "candidates"
+  add_foreign_key "interviews", "panelists"
   add_foreign_key "panelists", "organizations"
 end
