@@ -42,14 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "first_round_panelist_id"
-    t.bigint "second_round_panelist_id"
-    t.bigint "third_round_panelist_id"
-    t.bigint "final_round_panelist_id"
-    t.index ["final_round_panelist_id"], name: "index_interviews_on_final_round_panelist_id"
-    t.index ["first_round_panelist_id"], name: "index_interviews_on_first_round_panelist_id"
-    t.index ["second_round_panelist_id"], name: "index_interviews_on_second_round_panelist_id"
-    t.index ["third_round_panelist_id"], name: "index_interviews_on_third_round_panelist_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -79,9 +71,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.index ["reset_password_token"], name: "index_panelists_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "interviews", "panelists", column: "final_round_panelist_id"
-  add_foreign_key "interviews", "panelists", column: "first_round_panelist_id"
-  add_foreign_key "interviews", "panelists", column: "second_round_panelist_id"
-  add_foreign_key "interviews", "panelists", column: "third_round_panelist_id"
   add_foreign_key "panelists", "organizations"
 end
