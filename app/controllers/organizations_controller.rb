@@ -4,7 +4,9 @@ class OrganizationsController < ApplicationController
   before_action :authenticate_panelist!
   before_action :set_organization, only: %i[show update regenerate_invite_code]
 
-  def create_or_join; end
+  def create_or_join
+    redirect_to organization_path(current_panelist.organization) if current_panelist.organization
+  end
 
   def show
     redirect_to root_path unless @organization.panelists.include?(current_panelist)
@@ -42,6 +44,11 @@ class OrganizationsController < ApplicationController
     else
       redirect_to create_or_join_organizations_path, alert: 'Invalid organization code.'
     end
+  end
+
+  def leave
+    current_panelist.update(organization: nil)
+    redirect_to create_or_join_organizations_path, notice: 'Successfully left the organization'
   end
 
   def regenerate_invite_code
