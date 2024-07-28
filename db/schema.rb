@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_101015) do
     t.bigint "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_candidates_on_email", unique: true
     t.index ["organization_id"], name: "index_candidates_on_organization_id"
   end
 
